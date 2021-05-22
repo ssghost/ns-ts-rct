@@ -31,7 +31,7 @@ import { mainStackNavigator as AppContainer } from './components/Navigator'
 const getProducts = async (): Promise<CartItemType[]> =>
   await (await fetch('https://fakestoreapi.com/products')).json();
 
-const App = (AppContainer) => {
+const App = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([] as CartItemType[]);
   const { data, isLoading, error } = useQuery<CartItemType[]>(
@@ -101,5 +101,9 @@ const App = (AppContainer) => {
   );
 };
 
-ReactNativeScript.start(React.createElement(App, {}, null))
+export default App;
+
+
+
+ReactNativeScript.start(React.createElement(AppContainer, {forwardedRef: App}, null));
 
